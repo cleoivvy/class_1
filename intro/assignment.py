@@ -22,4 +22,4 @@ print(personal_info)
 # string formatting
 personal_info = f"""My name is {first_name} {last_name}. I am {age} years old and i love {hobby} in my free time.
 """
- 
+print(personal_info)
