@@ -55,43 +55,67 @@ data = {
             }
         ]
     }
-}
+} 
 
 
 
-# Departments in the company
-department_1 = data["company"]["departments"][0]["name"]
-department_2 = data["company"]["departments"][1]["name"]
-print(department_1, " ",  department_2)
+departments = data['company']['departments']
 
-# Engineers in the company
-engineer_1 = data["company"]["departments"][0]["employees"][0]["name"]
-engineer_2 = data["company"]["departments"][0]["employees"][1]["name"]
-print(engineer_1, " ", engineer_2)
+employees = data['company']['departments'][0]['employees']
 
-# Alice's projects
-alice_project = data["company"]["departments"][0]["employees"][0]["projects"]
-print(alice_project)
+alice_prjs = employees[0]['projects']
 
 
-# Budget for rebranding
-rebranding = data["company"]["departments"][1]["employees"][0]["campaigns"][1]
-print(rebranding)
+for department in departments:
+    print(department['name'])
 
 
-# Modify the nested data
-# new_project = {"name": "epsilon", "status" : "planned"}
-# bob_project = data["company"]["departments"][0]["employees"][1]["projects"]
-# update_bob =bob_project.append(new_project)
-# print(update_bob)
-# there's an issue with this one
+for employee in employees:
+
+    print(f"Name: {employee['name']} -- Role: {employee['role']}\n")
 
 
-# new_budget = data["company"]["departments"][1]["employees"][0]["campaigns"][0]["budget"] + 2000
-# product_launch = data["company"]["departments"][1]["employees"][0]["campaigns"]
-# new_launch = product_launch.append(new_budget)
-# print(new_launch)
-# there's an issue with this as well
+print("this is a list of all alice projects")
+for prj in alice_prjs:
+    
+    print(f"""
+Name: {prj['name']}
+Status: {prj['status']}
+""")
+   
+
+
+branding_budget = data['company']['departments'][1]['employees'][0]['campaigns'][1]['budget']
+
+print(branding_budget)
+
+data['company']['departments'][0]['employees'][0]['projects'][1]['status'] = "completed"
+data['company']['departments'][0]['employees'][1]['projects'].append({'name': 'Epsilon', 'status': 'planned'})
+data['company']['departments'][1]['employees'][0]['campaigns'][0]['budget'] += 2000
+
+
+staffs1 = len(departments[0]['employees'])
+staffs2 = len(departments[1]['employees'])
+
+
+
+
+
+report = f"""
+
+
+Data Reports:
+
+The amount of staffs in Engineering is; {staffs1}
+
+The amoount of staffs in Markteting is; {staffs2}
+
+
+"""
+
+print(report)
+
+
                           
                           
                           
@@ -118,21 +142,3 @@ print(data["company"]["departments"][0]["employees"][1]["name"])
 print(data["company"]["departments"][0]["employees"][1]["projects"])
 
 
-# marketing department
-print(data["company"]["departments"][1]["name"])
-
-# the employee in marketing department
-print(data["company"]["departments"][1]["employees"][0]["name"])
-
-# the campaigns in marketing department
-print(data["company"]["departments"][1]["employees"][0]["campaigns"])
-
-# the title of the first campaign under marketing
-print(data["company"]["departments"][1]["employees"][0]["campaigns"][0]["title"])
-
-# the budget for product launch
-print(data["company"]["departments"][1]["employees"][0]["campaigns"][0]["budget"])
-
-# rebranding and it's budget
-print(data["company"]["departments"][1]["employees"][0]["campaigns"][1]["title"])
-print(data["company"]["departments"][1]["employees"][0]["campaigns"][1]["budget"])
